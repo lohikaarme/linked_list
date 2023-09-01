@@ -1,4 +1,5 @@
 class LinkedList
+  include Enumerable
   attr_accessor :head, :tail
 
   def initialize
@@ -26,7 +27,7 @@ class LinkedList
     end
   end
 
-  def each_entry
+  def each
     return nil if @head.nil?
 
     entry = @head
@@ -92,6 +93,19 @@ class LinkedList
     last_node # returns popped node
   end
 
+  def contains?(value)
+    current = @head
+    while current
+      return true if current.data == value
+      current = current.next
+    end
+    false
+    # each do |entry|
+    #   return true if entry.data == value
+    # end
+    # false
+  end
+
 end
 
 class Node
@@ -109,8 +123,6 @@ class Node
   def next_node
     p @next
   end
-
-
 end
 
 list = LinkedList.new
@@ -120,3 +132,6 @@ node3 = Node.new(46)
 list.append(node1)
 list.append(node2)
 list.append(node3)
+list.contains?(4)
+
+list.contains?(5)
