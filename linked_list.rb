@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LinkedList
   include Enumerable
   attr_accessor :head, :tail
@@ -20,11 +22,10 @@ class LinkedList
   def append(entry)
     if @head.nil?
       @head = entry
-      @tail = entry
     else
       @tail.next = entry
-      @tail = entry
     end
+    @tail = entry
   end
 
   def each
@@ -77,12 +78,12 @@ class LinkedList
 
     node_key = at(node_count - 1)
     current_node = @head
-    previous_node = nil # rubocop:disable Lint/UselessAssignment
+    previous_node = nil
     last_node = nil
 
     while !current_node.nil? && current_node.data != node_key
       last_node = current_node
-      previous_node = current_node # rubocop:disable Lint/UselessAssignment
+      previous_node = current_node
       current_node = current_node.next
     end
 
@@ -97,15 +98,11 @@ class LinkedList
     current = @head
     while current
       return true if current.data == value
+
       current = current.next
     end
     false
-    # each do |entry|
-    #   return true if entry.data == value
-    # end
-    # false
   end
-
 end
 
 class Node
