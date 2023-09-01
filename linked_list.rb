@@ -116,6 +116,12 @@ class LinkedList
     nil
   end
 
+  def to_s
+    each do |entry|
+      print "( #{entry.data} ) -> "
+    end
+    print 'nil'
+  end
 end
 
 class Node
@@ -144,4 +150,4 @@ list.append(node2)
 list.append(node3)
 list.contains?(4)
 
-list.contains?(5)
+list.to_s
