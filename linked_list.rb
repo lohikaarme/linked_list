@@ -123,10 +123,16 @@ class LinkedList
     print 'nil'
   end
 
-  def insert_at(value, index) # will add to non-head/tail for legal positions in list
+  def insert_at(value, index)
     temp_node = Node.new(value)
     count = 0
-    current_node = @head
+    if @head.nil? || index.zero?
+      return prepend(temp_node)
+    elsif index > (node_count - 1)
+      return append(temp_node)
+    else
+      current_node = @head
+    end
 
     while count < (index - 1)
       count += 1
@@ -135,7 +141,6 @@ class LinkedList
 
     temp_node.next = current_node.next
     current_node.next = temp_node
-
   end
 end
 
