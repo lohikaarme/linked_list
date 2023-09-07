@@ -142,6 +142,33 @@ class LinkedList
     temp_node.next = current_node.next
     current_node.next = temp_node
   end
+
+  def remove_at(index)
+    count = 0
+    current_node = @head
+    removal_node = nil
+    subsequent_node = nil
+
+    if @head.nil?
+      return
+    elsif index.zero?
+      @head = @head.next
+      return current_node
+    elsif index > (node_count - 1)
+      return pop
+    end
+
+    while count < (index - 1)
+      count += 1
+      current_node = current_node.next
+      removal_node = current_node.next
+      subsequent_node = removal_node.next
+    end
+
+    current_node.next = subsequent_node
+
+    removal_node # returns popped node
+  end
 end
 
 class Node
@@ -160,14 +187,3 @@ class Node
     p @next
   end
 end
-
-list = LinkedList.new
-node1 = Node.new(4)
-node2 = Node.new(45)
-node3 = Node.new(46)
-list.append(node1)
-list.append(node2)
-list.append(node3)
-list.contains?(4)
-
-list.to_s
